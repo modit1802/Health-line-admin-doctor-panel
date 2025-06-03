@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Login from './pages/login.jsx'
+import Login from './pages/Login.jsx'
 import 'react-toastify/dist/ReactToastify.css' // Import toast styles
 import { ToastContainer } from 'react-toastify'
 import { AdminContext } from './context/AdminContext.jsx'
