@@ -31,61 +31,63 @@ const DoctorAppointment = () => {
         </div>
 
         {/* Data Rows */}
-        {appointments.map((item, index) => (
-          <div
-            key={index}
-            className='flex flex-col sm:grid sm:grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-3 sm:gap-1 p-4 border-b hover:bg-gray-50 transition'
-          >
-            {/* Index (hidden in mobile) */}
-            <p className='hidden sm:block'>{index + 1}</p>
+        {/* Data Rows */}
+{appointments.map((item, index) => (
+  <div
+    key={index}
+    className='flex flex-col sm:grid sm:grid-cols-[0.5fr_2fr_1fr_1fr_3fr_1fr_1fr] gap-3 sm:gap-1 p-4 border-b hover:bg-gray-50 transition'
+  >
+    {/* Index (hidden in mobile) */}
+    <p className='hidden sm:block'>{index + 1}</p>
 
-            {/* Patient Info */}
-            <div className='flex items-center gap-2'>
-              <img className='w-8 h-8 rounded-full object-cover' src={item.userData.image} alt={item.userData.name} />
-              <p>{item.userData.name}</p>
-            </div>
+    {/* Patient Info */}
+    <div className='flex items-center gap-2'>
+      <img className='w-8 h-8 rounded-full object-cover' src={item.userData.image} alt={item.userData.name} />
+      <p>{item.userData.name}</p>
+    </div>
 
-            {/* Payment Type */}
-            <p>
-              <span className={`text-xs px-2 py-0.5 rounded-full border ${item.payment ? 'border-green-500 text-green-600' : 'border-yellow-500 text-yellow-600'}`}>
-                {item.payment ? 'Online' : 'CASH'}
-              </span>
-            </p>
+    {/* Payment Type */}
+    <p>
+      <span className={`text-xs px-2 py-0.5 rounded-full border ${item.payment ? 'border-green-500 text-green-600' : 'border-yellow-500 text-yellow-600'}`}>
+        {item.payment ? 'Online' : 'CASH'}
+      </span>
+    </p>
 
-            {/* Age (hidden in mobile) */}
-            <p className='hidden sm:block'>{calculateAge(item.userData.dob)}</p>
+    {/* Age (hidden in mobile) */}
+    <p className='hidden sm:block'>{calculateAge(item.userData.dob)}</p>
 
-            {/* Date & Time */}
-            <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
+    {/* Date & Time */}
+    <p>{slotDateFormat(item.slotDate)}, {item.slotTime}</p>
 
-            {/* Fees */}
-            <p>{currencySymbol}{item.amount}</p>
+    {/* Fees */}
+    <p>{currencySymbol}{item.amount}</p>
 
-            {/* Action */}
-            <div className='flex items-center gap-2'>
-              {item.cancelled ? (
-                <span className='text-red-500 text-xs border border-red-500 rounded-full px-3 py-0.5'>Cancelled</span>
-              ) : item.isCompleted ? (
-                <span className='text-green-500 text-xs border border-green-400 rounded-full px-3 py-0.5'>Completed</span>
-              ) : (
-                <div className='flex gap-2'>
-                  <img
-                    onClick={() => cancelAppointment(item._id)}
-                    className='w-6 h-6 cursor-pointer'
-                    src={assets.cancel_icon}
-                    alt="Cancel"
-                  />
-                  <img
-                    onClick={() => completeAppointment(item._id)}
-                    className='w-6 h-6 cursor-pointer'
-                    src={assets.tick_icon}
-                    alt="Complete"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+    {/* Action */}
+    <div className='flex sm:justify-center justify-end gap-3 mt-2 sm:mt-0'>
+      {item.cancelled ? (
+        <span className='text-red-500 text-xs border border-red-500 rounded-full px-3 py-0.5'>Cancelled</span>
+      ) : item.isCompleted ? (
+        <span className='text-green-500 text-xs border border-green-400 rounded-full px-3 py-0.5'>Completed</span>
+      ) : (
+        <>
+          <img
+            onClick={() => cancelAppointment(item._id)}
+            className='w-8 h-8 cursor-pointer'
+            src={assets.cancel_icon}
+            alt="Cancel"
+          />
+          <img
+            onClick={() => completeAppointment(item._id)}
+            className='w-8 h-8 cursor-pointer'
+            src={assets.tick_icon}
+            alt="Complete"
+          />
+        </>
+      )}
+    </div>
+  </div>
+))}
+
       </div>
     </div>
   )
